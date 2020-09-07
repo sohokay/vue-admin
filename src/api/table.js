@@ -7,3 +7,10 @@ export function getList(params) {
     params
   })
 }
+export function getSchoolAttendanceList(params) {
+  return request({
+    url: '/vue-admin-template/table/schoolAttendance',
+    method: 'get',
+    params
+  })
+}
