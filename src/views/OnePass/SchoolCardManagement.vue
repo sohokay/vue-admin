@@ -116,19 +116,19 @@
       </el-table-column>
       <el-table-column label="学生照片" min-width="80px" align="center">
         <!--        <template slot-scope="{row}">-->
-        <template>
+        <!--        <template>-->
 
-          <!--          <span>{{ row.status }}</span>-->
-          <span>--</span>
-        </template>
+        <!--          <span>{{ row.status }}</span>-->
+        <span>--</span>
+        <!--        </template>-->
       </el-table-column>
       <el-table-column label="校牌相片" min-width="80px" align="center">
         <!--        <template slot-scope="{row}">-->
-        <templat>
+        <!--        <templat>-->
 
-          <!--          <span>{{ row.status }}</span>-->
-          <span>--</span>
-        </templat>
+        <!--          <span>{{ row.status }}</span>-->
+        <span>--</span>
+        <!--        </templat>-->
       </el-table-column>
       <el-table-column label="操作" align="center" min-width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
@@ -173,14 +173,19 @@
         label-width="70px"
         style="width: 400px; margin-left:50px;"
       >
-        <el-form-item  prop="type">
-          <el-select v-model="temp.type" class="filter-item" placeholder="Please select">
-            <el-option
-              v-for="item in calendarTypeOptions"
-              :key="item.key"
-              :label="item.display_name"
-              :value="item.key"
-            />
+        <el-form-item label="相片" prop="timestamp">
+          <div>
+            <img :src="temp.avatar" alt="">
+          </div>
+        </el-form-item>
+        <el-form-item label="姓名" prop="type">
+          <el-select v-model="temp.name" class="filter-item" placeholder="Please select" disabled>
+            <!--            <el-option-->
+            <!--              v-for="item in calendarTypeOptions"-->
+            <!--              :key="item.key"-->
+            <!--              :label="item.display_name"-->
+            <!--              :value="item.key"-->
+            <!--            />-->
           </el-select>
         </el-form-item>
         <el-form-item label="Date" prop="timestamp">
@@ -381,7 +386,8 @@ export default {
         timestamp: new Date(),
         title: '',
         type: '',
-        status: 'published'
+        status: 'published',
+        avatar: undefined
       },
       dialogFormVisible: false,
       dialogStatus: '',
