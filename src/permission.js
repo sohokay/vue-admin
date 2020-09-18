@@ -36,8 +36,13 @@ router.beforeEach(async(to, from, next) => {
       } else {
         // store拿不到用户信息的话 就去请求
         try {
-          await store.dispatch('user/getInfo')
-          next()
+          const { roles } = await store.dispatch('user/getInfo')
+          // 动态生成路由
+          const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+          console.log('accessRoutes', accessRoutes)
+          router.addRoutes(accessRoutes)
+          // next()
+          next({ ...to, replace: true })
         } catch (error) {
           // 请求失败或者设置失败,清除token,并且踢出用户
           await store.dispatch('user/resetToken')

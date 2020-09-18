@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+    <!--    头部搜索框-->
     <div class="filter-container">
       <el-select
         v-model="listQuery.className"
@@ -69,6 +70,7 @@
       <!--      </el-checkbox>-->
     </div>
 
+    <!--    table-->
     <el-table
       :key="tableKey"
       v-loading="listLoading"
@@ -154,7 +156,7 @@
         </template>
       </el-table-column>
     </el-table>
-
+    <!--分页器-->
     <pagination
       v-show="total>0"
       :total="total"
@@ -163,68 +165,44 @@
       @pagination="getList"
     />
 
-    // 发卡弹窗
+    <!--    // 发卡弹窗-->
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form
         ref="dataForm"
         :rules="rules"
         :model="temp"
         label-position="left"
-        label-width="70px"
-        style="width: 400px; margin-left:50px;"
+        label-width="100px"
+        style="width: 500px; margin-left:50px;"
       >
-        <el-form-item label="相片" prop="timestamp">
+        <el-form-item label="相片">
           <div>
             <img :src="temp.avatar" alt="">
           </div>
         </el-form-item>
-        <el-form-item label="姓名" prop="type">
-          <el-select v-model="temp.name" class="filter-item" placeholder="Please select" disabled>
-            <!--            <el-option-->
-            <!--              v-for="item in calendarTypeOptions"-->
-            <!--              :key="item.key"-->
-            <!--              :label="item.display_name"-->
-            <!--              :value="item.key"-->
-            <!--            />-->
-          </el-select>
+        <el-form-item label="姓名">
+          <div>{{ temp.name }}</div>
+          <!--          <el-input   disabled>-->
+          <!--            <el-option-->
+          <!--              v-for="item in calendarTypeOptions"-->
+          <!--              :key="item.key"-->
+          <!--              :label="item.display_name"-->
+          <!--              :value="item.key"-->
+          <!--            />-->
+          <!--          </el-input>-->
         </el-form-item>
-        <el-form-item label="Date" prop="timestamp">
-          <el-date-picker
-            v-model="temp.timestamp"
-            type="datetime"
-            placeholder="Please pick a date"
-          />
+
+        <el-form-item label="班级">
+          <div>{{ temp.className }}</div>
         </el-form-item>
-        <el-form-item label="Title" prop="title">
-          <el-input
-            v-model="temp.title"
-          />
+        <el-form-item label="学号">
+          <div>{{ temp.studentNumber }}</div>
         </el-form-item>
-        <el-form-item label="Status">
-          <el-select v-model="temp.status" class="filter-item" placeholder="Please select">
-            <el-option
-              v-for="item in statusOptions"
-              :key="item"
-              :label="item"
-              :value="item"
-            />
-          </el-select>
+        <el-form-item label="学生类型">
+          <div>{{ temp.type }}</div>
         </el-form-item>
-        <el-form-item label="Imp">
-          <el-rate
-            v-model="temp.importance"
-            :colors="['#99A9BF', '#F7BA2A', '#FF9900']"
-            :max="3"
-            style="margin-top:8px;"
-          />
-        </el-form-item>
-        <el-form-item label="Remark">
-          <el-input
-            v-model="temp.remark"
-            :autosize="{ minRows: 2, maxRows: 4}"
-            type="textarea"
-            placeholder="Please input"
-          />
+        <el-form-item label="补发卡号">
+          <el-input v-model="temp.cardNumber" placeholder="请输入卡号" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -236,7 +214,7 @@
         </el-button>
       </div>
     </el-dialog>
-    // 挂失确认弹窗
+    <!--    // 挂失确认弹窗-->
     <el-dialog
       title="提示"
       :visible.sync="reportTheLossDialog"
@@ -381,13 +359,12 @@ export default {
       showReviewer: false,
       temp: {
         id: undefined,
-        importance: 1,
-        remark: '',
-        timestamp: new Date(),
-        title: '',
-        type: '',
-        status: 'published',
-        avatar: undefined
+        avatar: undefined,
+        name: undefined,
+        studentNumber: undefined,
+        cardNumber: undefined,
+        className: undefined,
+        type: undefined
       },
       dialogFormVisible: false,
       dialogStatus: '',
@@ -460,14 +437,15 @@ export default {
       }
       this.handleFilter()
     },
+    // 重置 temp 数据
     resetTemp() {
       this.temp = {
-        id: undefined,
-        importance: 1,
-        remark: '',
-        timestamp: new Date(),
-        title: '',
-        status: 'published',
+        id: '',
+        avatar: '',
+        name: '',
+        studentNumber: '',
+        cardNumber: '',
+        className: '',
         type: ''
       }
     },
@@ -497,9 +475,10 @@ export default {
         }
       })
     },
+    // 挂失卡片
     handleUpdate(row) {
       this.temp = Object.assign({}, row) // copy obj
-      this.temp.timestamp = new Date(this.temp.timestamp)
+      this.temp.cardNumber = ''
       this.dialogStatus = 'create'
       this.dialogFormVisible = true
       this.$nextTick(() => {

@@ -12,7 +12,7 @@
       >
         <el-option
           v-for="item in listFilter.className"
-          :key="item.id"
+          :key="item.name"
           :label="item.name"
           :value="item.id"
         />
@@ -27,7 +27,7 @@
       >
         <el-option
           v-for="item in listFilter.type"
-          :key="item.id"
+          :key="item.name"
           :label="item.name"
           :value="item.id"
         />
@@ -35,7 +35,7 @@
       <el-select v-model="listQuery.inOrOut" placeholder="进出学校" clearable style="width: 120px" class="filter-item">
         <el-option
           v-for="item in listFilter.inOrOut"
-          :key="item.id"
+          :key="item.name"
           :label="item.name"
           :value="item.id"
         />
@@ -52,7 +52,7 @@
       <el-select v-model="listQuery.status" placeholder="考勤状态" clearable style="width: 120px" class="filter-item">
         <el-option
           v-for="item in listFilter.status"
-          :key="item.id"
+          :key="item.name"
           :label="item.name"
           :value="item.id"
         />
@@ -60,7 +60,7 @@
       <el-select v-model="listQuery.week" placeholder="星期" clearable class="filter-item" style="width: 120px">
         <el-option
           v-for="item in listFilter.week"
-          :key="item.id"
+          :key="item.name"
           :label="item.name"
           :value="item.id"
         />
@@ -68,7 +68,7 @@
       <el-select v-model="listQuery.timeBucket" placeholder="考勤时段" clearable style="width: 180px" class="filter-item">
         <el-option
           v-for="item in listFilter.timeBucket"
-          :key="item.id"
+          :key="item.name"
           :label="item.name"
           :value="item.id"
         />
@@ -76,7 +76,7 @@
       <el-select v-model="listQuery.deviceCode" placeholder="主机ID" clearable style="width: 150px" class="filter-item">
         <el-option
           v-for="item in listFilter.deviceCode"
-          :key="item.id"
+          :key="item.name"
           :label="item.name"
           :value="item.id"
         />
@@ -84,7 +84,7 @@
       <el-select v-model="listQuery.searchTypes" placeholder="搜索类型" clearable style="width: 120px" class="filter-item">
         <el-option
           v-for="item in listFilter.searchTypes"
-          :key="item.id"
+          :key="item.name"
           :label="item.name"
           :value="item.id"
         />

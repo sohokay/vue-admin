@@ -150,13 +150,14 @@
       @pagination="getList"
     />
 
+    <!--    // 编辑 亲情号码 弹窗-->
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form
         ref="dataForm"
         :rules="rules"
         :model="temp"
         label-position="left"
-        label-width="70px"
+        label-width="100px"
         style="width: 500px; margin-left:50px;"
       >
         <el-form-item label="姓名" prop="type">
@@ -191,7 +192,7 @@
         </el-form-item>
 
         <el-form-item label="班级">
-          <el-select v-model="temp.className" class="filter-item" placeholder="Please select" disabled>
+          <el-select v-model="temp.className" class="filter-item" placeholder="" disabled>
             <el-option
               v-for="item in listFilter.className"
               :key="item.id"
@@ -201,7 +202,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="学生类型">
-          <el-select v-model="temp.type" class="filter-item" placeholder="Please select" disabled>
+          <el-select v-model="temp.type" class="filter-item" placeholder="" disabled>
             <el-option
               v-for="item in listFilter.type"
               :key="item.id"
